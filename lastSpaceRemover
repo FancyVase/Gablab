@@ -1,0 +1,22 @@
+import os
+
+# Place lastSpaceRemover in folder with TEST_SUBJECT folders
+# Replace "path" with that folder path
+path = '' 
+fileList = []
+
+# Get all file directories for text files
+for root, dirs, files in os.walk(path):
+    for file in files:
+        if file.endswith(".txt"):
+        	file_directory = (os.path.join(root, file))
+        	fileList.append(file_directory)
+
+# Look at these text files and truncate them if they have an extra space 
+for directory in fileList:
+	f = open(directory, 'r+')
+	content = f.read()
+	if not content.endswith("0"): # All text files to be considered are supposed to end with "1.0" or "2.0"
+		with open(directory, 'rb+') as filehandle:
+			filehandle.seek(-1, os.SEEK_END)
+			filehandle.truncate()
